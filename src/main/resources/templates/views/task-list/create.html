@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/main">
+<body>
+<div layout:fragment="content">
+    <h1>Create task list</h1>
+    <form method="post" action="" th:object="${taskList}">
+        <div th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+            <label for="name">Task list's name</label>
+            <input type="text" class="form-control" id="name" placeholder="Task list's name" th:field="*{name}"/>
+            <p th:if="${#fields.hasErrors('name')}" class="help-block" th:errors="*{name}">Invalid name</p>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+</body>
+</html>
