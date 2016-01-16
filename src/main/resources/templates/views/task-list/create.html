@@ -3,7 +3,7 @@
 <body>
 <div layout:fragment="content">
     <h1>Create task list</h1>
-    <form method="post" action="" th:object="${taskList}">
+    <form method="post" action="" th:object="${taskList}" th:action="@{/task-list/create}">
         <div th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
             <label for="name">Task list's name</label>
             <input type="text" class="form-control" id="name" placeholder="Task list's name" th:field="*{name}"/>

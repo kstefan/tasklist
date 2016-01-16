@@ -43,7 +43,7 @@ public class TaskListController {
         return "views/task-list/detail";
     }
 
-    @RequestMapping(path = "/delete/{token}")
+    @RequestMapping(path = "/delete/{token}", method = RequestMethod.POST)
     public String delete(@PathVariable("token") String token) {
         TaskList taskList = requireTaskList(token);
         taskListService.deleteTaskList(taskList);
