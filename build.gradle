@@ -47,4 +47,11 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
 }
 
+// Stage task for Heroku
 task stage(dependsOn: ['build'])
+
+bootRun {
+    addResources = false
+    environment 'spring.profiles.active', 'dev'
+    main = 'cz.karelstefan.tasklist.TasklistApplication'
+}
