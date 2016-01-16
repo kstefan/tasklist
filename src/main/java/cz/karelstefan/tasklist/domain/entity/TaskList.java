@@ -1,4 +1,4 @@
-package cz.karelstefan.tasklist.entity;
+package cz.karelstefan.tasklist.domain.entity;
 
 import javax.persistence.*;
 import java.util.List;

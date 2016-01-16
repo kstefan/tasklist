@@ -1,4 +1,4 @@
-package cz.karelstefan.tasklist.dto;
+package cz.karelstefan.tasklist.domain.dto;
 
 import org.hibernate.validator.constraints.NotBlank;
 

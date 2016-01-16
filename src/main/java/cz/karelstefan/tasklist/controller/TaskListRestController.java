@@ -1,7 +1,7 @@
 package cz.karelstefan.tasklist.controller;
 
-import cz.karelstefan.tasklist.dto.TaskListDto;
-import cz.karelstefan.tasklist.entity.TaskList;
+import cz.karelstefan.tasklist.domain.dto.TaskListDto;
+import cz.karelstefan.tasklist.domain.entity.TaskList;
 import cz.karelstefan.tasklist.service.TaskListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

@@ -1,7 +1,7 @@
 package cz.karelstefan.tasklist.service;
 
-import cz.karelstefan.tasklist.dto.TaskListDto;
-import cz.karelstefan.tasklist.entity.TaskList;
+import cz.karelstefan.tasklist.domain.dto.TaskListDto;
+import cz.karelstefan.tasklist.domain.entity.TaskList;
 
 import java.util.Optional;
 

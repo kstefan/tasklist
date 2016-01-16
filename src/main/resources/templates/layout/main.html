@@ -18,6 +18,9 @@
 </header>
 
 <div class="container">
+    <div th:if="${message != null}" th:text="${message.text}" class="alert" role="alert"
+         th:classappend="${message.type == T(cz.karelstefan.tasklist.domain.Message.Type).ERROR ? 'alert-danger' : 'alert-success'}">Message</div>
+
     <div layout:fragment="content"></div>
 </div>
 </body>
