@@ -3,6 +3,10 @@
 <body>
 <div layout:fragment="content">
     <h1>Internal server error</h1>
+    <p th:if="${status != null}" th:text="${status}">Status</p>
+    <p th:if="${error != null}" th:text="${error}">Error</p>
+    <p th:if="${message != null}" th:text="${message}">Message</p>
+
 </div>
 </body>
 </html>
