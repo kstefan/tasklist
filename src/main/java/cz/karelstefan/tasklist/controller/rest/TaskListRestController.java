@@ -1,5 +1,6 @@
-package cz.karelstefan.tasklist.controller;
+package cz.karelstefan.tasklist.controller.rest;
 
+import cz.karelstefan.tasklist.controller.TaskListNotFoundException;
 import cz.karelstefan.tasklist.domain.dto.TaskListDto;
 import cz.karelstefan.tasklist.domain.entity.TaskList;
 import cz.karelstefan.tasklist.service.TaskListService;

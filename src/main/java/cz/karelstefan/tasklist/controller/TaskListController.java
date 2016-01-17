@@ -49,7 +49,7 @@ public class TaskListController {
     public String delete(@PathVariable("token") String token, RedirectAttributes redirectAttributes) {
         TaskList taskList = requireTaskList(token);
         taskListService.deleteTaskList(taskList);
-        redirectAttributes.addFlashAttribute("message",
+        redirectAttributes.addFlashAttribute("_message",
                 new Message(Message.Type.SUCCESS, "The task list has been successfully removed"));
         return "redirect:/";
     }
