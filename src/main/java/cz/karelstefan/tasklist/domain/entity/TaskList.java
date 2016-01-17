@@ -17,7 +17,7 @@ public class TaskList {
     @Column(unique = true)
     private String token;
 
-    @OneToMany(mappedBy = "taskList")
+    @OneToMany(mappedBy = "taskList", orphanRemoval=true)
     @OrderBy("priority DESC, id DESC")
     private List<Task> tasks;
 
