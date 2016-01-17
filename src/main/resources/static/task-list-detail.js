@@ -12,20 +12,20 @@ $(function() {
 
     tasks.on("click", ".save-task", function(e) {
         var task = getClosestRow(this);
-        var inptutData = getTaskData(task);
+        var inputData = getTaskData(task);
         var ajaxDone = function(data) {
             task.row.before(createRowFromData(data));
             task.row.remove();
         }
 
-        if (!validateInputData(inptutData)) {
+        if (!validateInputData(inputData)) {
             return;
         }
 
         if (task.id) {
-            ajax("PUT", taskRestUrl + "/" + task.id, inptutData).done(ajaxDone);
+            ajax("PUT", taskRestUrl + "/" + task.id, inputData).done(ajaxDone);
         } else {
-            ajax("POST", taskRestUrl, inptutData).done(ajaxDone);
+            ajax("POST", taskRestUrl, inputData).done(ajaxDone);
         }
     });
 
