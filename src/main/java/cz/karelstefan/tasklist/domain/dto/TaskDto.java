@@ -13,9 +13,6 @@ public class TaskDto {
     @Size(min = 1, max = 255)
     private String text;
 
-    @NotBlank
-    private String taskListToken;
-
     private Boolean done;
 
     private TaskPriority priority;
@@ -34,14 +31,6 @@ public class TaskDto {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public String getTaskListToken() {
-        return taskListToken;
-    }
-
-    public void setTaskListToken(String taskListToken) {
-        this.taskListToken = taskListToken;
     }
 
     public Boolean getDone() {

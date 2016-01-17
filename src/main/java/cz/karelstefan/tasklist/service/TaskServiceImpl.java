@@ -15,9 +15,6 @@ import java.util.Optional;
 public class TaskServiceImpl implements TaskService {
 
     @Autowired
-    private TaskListRepository taskListRepository;
-
-    @Autowired
     private TaskRepository taskRepository;
 
     @Override
@@ -27,12 +24,16 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskDto createTask(TaskDto taskDto) {
-        TaskList taskList = taskListRepository.findByToken(taskDto.getTaskListToken());
-        if (taskList == null) {
-            throw new IllegalArgumentException("Task list not found");
+    public Optional<TaskDto> getTaskDto(Long id, String taskListToken) {
+        Optional<Task> task = getTask(id, taskListToken);
+        if (task.isPresent()) {
+            return Optional.of(convertTaskToDto(task.get()));
         }
+        return Optional.empty();
+    }
 
+    @Override
+    public TaskDto createTask(TaskList taskList, TaskDto taskDto) {
         Task task = new Task();
         task.setText(taskDto.getText());
         task.setPriority(taskDto.getPriority());
@@ -48,13 +49,23 @@ public class TaskServiceImpl implements TaskService {
         return convertTaskToDto(taskRepository.saveAndFlush(task));
     }
 
+    @Override
+    public void deleteTask(Task task) {
+        taskRepository.delete(task);
+    }
+
+    @Override
+    public void markDone(Task task) {
+        task.setDone(true);
+        taskRepository.saveAndFlush(task);
+    }
+
     private TaskDto convertTaskToDto(Task task) {
         TaskDto dto = new TaskDto();
         dto.setId(task.getId());
         dto.setPriority(task.getPriority());
         dto.setText(task.getText());
         dto.setDone(task.getDone());
-        dto.setTaskListToken(task.getTaskList().getToken());
         return dto;
     }
 

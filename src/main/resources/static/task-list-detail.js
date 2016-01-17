@@ -4,6 +4,7 @@ $(function() {
     var tasks = $("#tasks");
     var taskRestUrl = tasks.attr("data-task-rest-url");
     var taskListToken = tasks.attr("data-task-list-token");
+    var taskRestCrudUrl = taskRestUrl + "/" + taskListToken;
 
     $("#add-task").on( "click", function(e) {
         var task = taskEditTemplate.clone();
@@ -23,11 +24,63 @@ $(function() {
         }
 
         if (task.id) {
-            ajax("PUT", taskRestUrl + "/" + task.id, inputData).done(ajaxDone);
+            jsonAjax("PUT", taskRestCrudUrl + "/" + task.id, inputData).done(ajaxDone);
         } else {
-            ajax("POST", taskRestUrl, inputData).done(ajaxDone);
+            jsonAjax("POST", taskRestCrudUrl, inputData).done(ajaxDone);
         }
     });
+
+    tasks.on("click", ".cancel-task", function(e) {
+        var task = getClosestRow(this);
+        if (task.id) {
+            jsonAjax("GET", taskRestCrudUrl + "/" + task.id, {}).done(function(data) {
+                task.row.before(createRowFromData(data));
+                task.row.remove();
+            });
+        } else {
+            task.row.remove();
+        }
+    });
+
+    tasks.on("click", ".edit-task", function(e) {
+        var rTask = getClosestRow(this);
+        var eTask = taskEditTemplate.clone();
+        eTask.attr("data-id", rTask.row.attr("data-id"));
+        eTask.find("[name='text']").val(rTask.row.find(".task-text").html());
+        rTask.row.before(eTask);
+        rTask.row.remove();
+    });
+
+    tasks.on("click", ".mark-done-task", function(e) {
+        var task = getClosestRow(this);
+        $.ajax({
+            method: "PUT",
+            url: taskRestUrl + "/mark-done/" + taskListToken + "/" + task.id,
+        }).done(function() {
+            task.row.remove();
+        });
+    });
+
+    tasks.on("click", ".delete-task", function(e) {
+        if (!confirm('Do you want to delete this task?')) {
+            return;
+        }
+
+        var task = getClosestRow(this);
+        $.ajax({
+            method: "DELETE",
+            url: taskRestCrudUrl + "/" + task.id,
+        }).done(function() {
+            task.row.remove();
+        });
+    });
+
+    var getClosestRow = function(sel) {
+        var task = {};
+        task.row = $(sel).closest("tr");
+        task.id = task.row.attr("data-id");
+        return task;
+    }
 
     var validateInputData = function(data) {
         if (!data.text || !data.text.trim().length) {
@@ -48,7 +101,7 @@ $(function() {
         return {taskListToken: taskListToken, text: task.row.find("[name='text']").val()};
     }
 
-    var ajax = function(method, url, data) {
+    var jsonAjax = function(method, url, data) {
         return $.ajax({
             method: method,
             url: url,
@@ -58,29 +111,5 @@ $(function() {
         })
     }
 
-    tasks.on("click", ".cancel-task", function(e) {
-        var task = getClosestRow(this);
-        if (task.id) {
-
-        } else {
-            task.row.remove();
-        }
-    });
-
-    tasks.on("click", ".edit-task", function(e) {
-        var rTask = getClosestRow(this);
-        var eTask = taskEditTemplate.clone();
-        eTask.attr("data-id", rTask.row.attr("data-id"));
-        eTask.find("[name='text']").val(rTask.row.find(".task-text").html());
-        rTask.row.before(eTask);
-        rTask.row.remove();
-    });
-
-    var getClosestRow = function(sel) {
-        var task = {};
-        task.row = $(sel).closest("tr");
-        task.id = task.row.attr("data-id");
-        return task;
-    }
 });
 
