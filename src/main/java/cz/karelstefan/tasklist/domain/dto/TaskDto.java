@@ -1,25 +1,24 @@
-package cz.karelstefan.tasklist.domain.entity;
+package cz.karelstefan.tasklist.domain.dto;
 
 import cz.karelstefan.tasklist.domain.TaskPriority;
+import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.*;
+import javax.validation.constraints.Size;
 
-@Entity
-public class Task {
+public class TaskDto {
 
-    @Id
-    @GeneratedValue
     private Long id;
 
-    @Column(length = 255)
+    @NotBlank
+    @Size(min = 1, max = 255)
     private String text;
+
+    @NotBlank
+    private String taskListToken;
 
     private Boolean done;
 
     private TaskPriority priority;
-
-    @ManyToOne
-    private TaskList taskList;
 
     public Long getId() {
         return id;
@@ -29,20 +28,20 @@ public class Task {
         this.id = id;
     }
 
-    public TaskList getTaskList() {
-        return taskList;
-    }
-
-    public void setTaskList(TaskList taskList) {
-        this.taskList = taskList;
-    }
-
     public String getText() {
         return text;
     }
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getTaskListToken() {
+        return taskListToken;
+    }
+
+    public void setTaskListToken(String taskListToken) {
+        this.taskListToken = taskListToken;
     }
 
     public Boolean getDone() {
