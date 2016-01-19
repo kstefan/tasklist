@@ -3,6 +3,9 @@ package cz.karelstefan.tasklist.domain.dto;
 import cz.karelstefan.tasklist.domain.TaskPriority;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class TaskDto {
@@ -15,7 +18,10 @@ public class TaskDto {
 
     private Boolean done;
 
-    private TaskPriority priority;
+    @NotNull
+    @Min(1)
+    @Max(3)
+    private Byte priority;
 
     public Long getId() {
         return id;
@@ -41,11 +47,11 @@ public class TaskDto {
         this.done = done;
     }
 
-    public TaskPriority getPriority() {
+    public Byte getPriority() {
         return priority;
     }
 
-    public void setPriority(TaskPriority priority) {
+    public void setPriority(Byte priority) {
         this.priority = priority;
     }
 }

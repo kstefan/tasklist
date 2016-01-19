@@ -20,6 +20,13 @@
         <tbody class="hide" id="task-edit-template">
             <tr data-id="">
                 <td><input type="text" name="text" required="required" maxlength="255" class="form-control" placeholder="Task's text"/></td>
+                <td>
+                    <select name="priority" class="form-control">
+                        <option value="1">Priorita 1</option>
+                        <option value="2">Priorita 2</option>
+                        <option value="3">Priorita 3</option>
+                    </select>
+                </td>
                 <td class="text-right">
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-default save-task" title="Save">
@@ -33,12 +40,12 @@
             </tr>
         </tbody>
         <tbody class="hide" id="task-template">
-            <tr th:replace="views/task-list/row :: taskRow('', '')"></tr>
+            <tr th:replace="views/task-list/row :: taskRow('', '', '')"></tr>
         </tbody>
         <tbody id="tasks"
                th:attr="data-task-rest-url=@{/rest/task}, data-task-list-token=${taskList.token}">
-            <th:block th:each="task : ${taskList.tasks}">
-                <tr th:replace="views/task-list/row :: taskRow(${task.id}, ${task.text})"></tr>
+            <th:block th:each="task : ${tasks}">
+                <tr th:replace="views/task-list/row :: taskRow(${task.id}, ${task.text}, ${task.priority})"></tr>
             </th:block>
         </tbody>
     </table>

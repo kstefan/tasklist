@@ -4,6 +4,7 @@ import cz.karelstefan.tasklist.domain.dto.TaskDto;
 import cz.karelstefan.tasklist.domain.entity.Task;
 import cz.karelstefan.tasklist.domain.entity.TaskList;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface TaskService {
@@ -19,4 +20,6 @@ public interface TaskService {
     void deleteTask(Task task);
 
     void markDone(Task task);
+
+    List<Task> findTasks(TaskList taskList);
 }

@@ -1,7 +1,5 @@
 package cz.karelstefan.tasklist.domain.entity;
 
-import cz.karelstefan.tasklist.domain.TaskPriority;
-
 import javax.persistence.*;
 
 @Entity
@@ -14,9 +12,9 @@ public class Task {
     @Column(length = 255)
     private String text;
 
-    private Boolean done;
+    private Boolean done = false;
 
-    private TaskPriority priority;
+    private Byte priority = 1;
 
     @ManyToOne
     private TaskList taskList;
@@ -53,11 +51,14 @@ public class Task {
         this.done = done;
     }
 
-    public TaskPriority getPriority() {
+    public Byte getPriority() {
         return priority;
     }
 
-    public void setPriority(TaskPriority priority) {
+    public void setPriority(Byte priority) {
+        if (priority == null || priority < 1 || priority > 3) {
+            throw new IllegalArgumentException("Invalid priority");
+        }
         this.priority = priority;
     }
 }

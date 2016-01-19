@@ -18,7 +18,6 @@ public class TaskList {
     private String token;
 
     @OneToMany(mappedBy = "taskList", orphanRemoval=true)
-    @OrderBy("priority DESC, id DESC")
     private List<Task> tasks;
 
     public TaskList() {

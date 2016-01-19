@@ -9,6 +9,7 @@ import cz.karelstefan.tasklist.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,8 +20,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Optional<Task> getTask(Long id, String taskListToken) {
-        // TODO find by id and token
-        return Optional.ofNullable(taskRepository.findOne(id));
+        return Optional.ofNullable(taskRepository.findTask(id, taskListToken));
     }
 
     @Override
@@ -58,6 +58,11 @@ public class TaskServiceImpl implements TaskService {
     public void markDone(Task task) {
         task.setDone(true);
         taskRepository.saveAndFlush(task);
+    }
+
+    @Override
+    public List<Task> findTasks(TaskList taskList) {
+        return taskRepository.findTasks(taskList.getToken());
     }
 
     private TaskDto convertTaskToDto(Task task) {

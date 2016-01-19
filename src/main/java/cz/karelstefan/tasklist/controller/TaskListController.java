@@ -4,6 +4,7 @@ import cz.karelstefan.tasklist.domain.Message;
 import cz.karelstefan.tasklist.domain.dto.TaskListDto;
 import cz.karelstefan.tasklist.domain.entity.TaskList;
 import cz.karelstefan.tasklist.service.TaskListService;
+import cz.karelstefan.tasklist.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,9 @@ public class TaskListController {
 
     @Autowired
     private TaskListService taskListService;
+
+    @Autowired
+    private TaskService taskService;
 
     @RequestMapping(path = "/create", method = RequestMethod.GET)
     public String create(Model model) {
@@ -42,6 +46,7 @@ public class TaskListController {
     public String detail(@PathVariable("token") String token, Model model) {
         TaskList taskList = requireTaskList(token);
         model.addAttribute("taskList", taskList);
+        model.addAttribute("tasks", taskService.findTasks(taskList));
         return "views/task-list/detail";
     }
 

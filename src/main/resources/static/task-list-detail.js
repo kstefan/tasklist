@@ -47,6 +47,7 @@ $(function() {
         var eTask = taskEditTemplate.clone();
         eTask.attr("data-id", rTask.row.attr("data-id"));
         eTask.find("[name='text']").val(rTask.row.find(".task-text").html());
+        eTask.find("[name='priority']").val(rTask.row.find(".task-priority").html());
         rTask.row.before(eTask);
         rTask.row.remove();
     });
@@ -94,11 +95,16 @@ $(function() {
         var row = taskTemplate.clone();
         row.attr("data-id", taskData.id);
         row.find(".task-text").html(taskData.text);
+        row.find(".task-priority").html(taskData.priority);
         return row;
     }
 
     var getTaskData = function(task) {
-        return {taskListToken: taskListToken, text: task.row.find("[name='text']").val()};
+        return {
+            taskListToken: taskListToken,
+            text: task.row.find("[name='text']").val(),
+            priority: task.row.find("[name='priority']").val()
+        };
     }
 
     var jsonAjax = function(method, url, data) {

@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <table>
-    <th:block th:fragment="taskRow(id, text)">
+    <th:block th:fragment="taskRow(id, text, priority)">
         <tr th:attr="data-id=${id}">
             <td th:text="${text}" class="task-text">Text</td>
+            <td>Priorita <span th:text="${priority}" class="task-priority"></span></td>
             <td class="text-right">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-success mark-done-task" title="Mark as done">
