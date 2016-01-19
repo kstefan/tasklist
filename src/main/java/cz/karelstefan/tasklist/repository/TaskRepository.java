@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-interface TaskRepository extends JpaRepository<Task, Long> {
+public interface TaskRepository extends JpaRepository<Task, Long> {
 
     @Query("select t from Task t join t.taskList tl where t.id = ?1 and tl.token = ?2")
     Task findTask(Long id, String taskListToken);
