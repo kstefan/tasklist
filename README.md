@@ -7,6 +7,14 @@ The demo application is hosted on Heroku:
 
 https://kstefan-tasklist.herokuapp.com
 
+## Build and run
+The application is builded by Gradle.
+
+To run the application you can use the "bootRun" task:
+```
+gradle bootRun
+```
+
 ## Used technologies
 * [Spring Boot](http://projects.spring.io/spring-boot/)
 * [Spring Data](http://projects.spring.io/spring-data/) - Spring Data JPA
