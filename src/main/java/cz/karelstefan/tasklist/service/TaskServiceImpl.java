@@ -4,7 +4,6 @@ package cz.karelstefan.tasklist.service;
 import cz.karelstefan.tasklist.domain.dto.TaskDto;
 import cz.karelstefan.tasklist.domain.entity.Task;
 import cz.karelstefan.tasklist.domain.entity.TaskList;
-import cz.karelstefan.tasklist.repository.TaskListRepository;
 import cz.karelstefan.tasklist.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

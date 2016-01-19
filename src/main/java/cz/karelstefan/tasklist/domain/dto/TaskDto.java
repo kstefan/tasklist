@@ -1,6 +1,5 @@
 package cz.karelstefan.tasklist.domain.dto;
 
-import cz.karelstefan.tasklist.domain.TaskPriority;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.Max;
