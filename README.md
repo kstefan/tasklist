@@ -8,7 +8,7 @@ The demo application is hosted on Heroku:
 https://kstefan-tasklist.herokuapp.com
 
 ## Build and run
-The application is builded by Gradle.
+The application is built by Gradle.
 
 To run the application you can use the "bootRun" task:
 ```
